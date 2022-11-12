@@ -21,7 +21,7 @@ public class Main {
         }
     }
 
-    static int[] bubbleSort(int[] data) {
+    public static int[] bubbleSort(int[] data) {
         for (int i = 0; i < data.length - 1; ++i) {
             for (int j = i + 1; j < data.length; ++j) {
                 if (data[i] > data[j]) {
