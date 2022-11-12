@@ -7,14 +7,14 @@ public class Main {
         System.out.print("Введите число, для которого необходимо подсчитать факториал: ");
         try {
             int num = in.nextInt();
-            Factorial(num);
+            factorial(num);
         }
         catch (InputMismatchException ex) {
             System.out.println("Вы ввели некорректное число.");
         }
     }
 
-    public static void Factorial(int number) {
+    public static void factorial(int number) {
         if (number < 0) {
             System.out.print("Число не должно быть меньше нуля.");
         } else if (number == 0) {
