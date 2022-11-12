@@ -10,7 +10,7 @@ public class Main {
         System.out.print(printLetterCount(string));
     }
 
-    static String printLetterCount (String string) {
+    public static String printLetterCount (String string) {
         int vowelsCounter = 0, consonantsCounter = 0, unknownCounter = 0;
         ArrayList<Character> vowels = new ArrayList<>(Arrays.asList('a', 'e', 'o', 'i', 'y', 'u'));
         vowels.addAll(Arrays.asList('а', 'и', 'е', 'ё', 'у', 'ы', 'о', 'э', 'ю', 'я'));
