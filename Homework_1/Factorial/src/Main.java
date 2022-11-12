@@ -14,7 +14,7 @@ public class Main {
         }
     }
 
-    static void Factorial(int number) {
+    public static void Factorial(int number) {
         if (number < 0) {
             System.out.print("Число не должно быть меньше нуля.");
         } else if (number == 0) {
