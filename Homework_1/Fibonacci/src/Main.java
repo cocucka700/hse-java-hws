@@ -14,7 +14,7 @@ public class Main {
         }
     }
 
-    static void fibonacci(int number) {
+    public static void fibonacci(int number) {
         if (number < 1) {
             System.out.print("Минимальное количество чисел для работы программы: 1");
         } else if (number == 1) {
