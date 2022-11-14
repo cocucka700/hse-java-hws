@@ -4,7 +4,6 @@ public class Student {
     private byte mark = 0;
     private boolean attendance = false;
     private boolean markIsChanged = false;
-    private boolean attendanceIsChanged = false;
 
     public Student(String name, String surname) {
         this.name = name;
@@ -46,13 +45,5 @@ public class Student {
 
     public boolean getMarkIsChanged() {
         return markIsChanged;
-    }
-
-    public void setAttendanceIsChanged(boolean attendanceIsChanged) {
-        this.attendanceIsChanged = attendanceIsChanged;
-    }
-
-    public boolean getAttendanceIsChanged() {
-        return attendanceIsChanged;
     }
 }

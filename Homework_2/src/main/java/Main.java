@@ -1,5 +1,7 @@
-import java.util.*;
-// /fill - random filling, /add - add student, /show - list of students, /remove - remove student, /exit - exit
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -43,14 +45,14 @@ public class Main {
     }
 
     private static void fill(Scanner in, ArrayList<Student> data) {
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("Иван", "Павел", "Андрей", "Евгений", "Мария", "Анастасия", "Юлия", "Елизавета"));
-        ArrayList<String> surnames = new ArrayList<>(Arrays.asList("Иванов", "Дмитриев", "Макаров", "Пономарёв", "Миронов", "Антонов", "Чирков"));
-        Random rnd = new Random();
-
         if (!data.isEmpty()) {
             System.out.println("Ошибка! Список не пуст. Заполнение случайными значениями возможно только для пустого списка.");
             return;
         }
+
+        ArrayList<String> names = new ArrayList<>(Arrays.asList("Иван", "Павел", "Андрей", "Евгений", "Мария", "Анастасия", "Юлия", "Елизавета"));
+        ArrayList<String> surnames = new ArrayList<>(Arrays.asList("Иванов", "Дмитриев", "Макаров", "Пономарёв", "Миронов", "Антонов", "Чирков"));
+        Random rnd = new Random();
 
         boolean correctValue = true;
         byte amount = 0;
@@ -130,32 +132,31 @@ public class Main {
             return;
         }
 
-        boolean correctIndex;
+        byte index = get_index(in, data);
+        Student st = data.get(index);
+        if (st.getMarkIsChanged()) {
+            System.out.println("Ошибка! Этому суденту уже поставлена оценка.");
+        } else {
+            ask_student(in, st);
+        }
+        System.out.println();
+    }
+
+    private static byte get_index(Scanner in, ArrayList<Student> data) {
         byte index = -1;
         do {
             System.out.print("Введите номер студента, которому хотите выставить оценку: ");
             if (in.hasNextByte()) {
                 index = in.nextByte();
                 --index;
-                correctIndex = true;
             } else {
                 in.next();
-                correctIndex = false;
             }
             if (index < 0 || index > data.size() - 1) {
                 System.out.println("Ошибка! Номер студента некорректен. Убедитесь, что он лежит в диапазоне [1; " + data.size() + "].");
-                correctIndex = false;
             }
-            if (correctIndex) {
-                Student st = data.get(index);
-                if (st.getMarkIsChanged()) {
-                    System.out.println("Ошибка! Этому суденту уже поставлена оценка.");
-                } else {
-                    ask_student(in, st);
-                }
-            }
-        } while (!correctIndex);
-        System.out.println();
+        } while (index < 0 || index > data.size() - 1);
+        return index;
     }
 
     private static void ask_student(Scanner in, Student st) {
@@ -168,11 +169,9 @@ public class Main {
             attendance = in.next();
             if (attendance.equals("y")) {
                 correctAttendance = true;
-                st.setAttendanceIsChanged(true);
                 st.setAttendance(true);
             } else if (attendance.equals("n")) {
                 correctAttendance = true;
-                st.setAttendanceIsChanged(true);
                 st.setAttendance(false);
             } else {
                 correctAttendance = false;
@@ -246,23 +245,7 @@ public class Main {
         if (data.isEmpty()) {
             return;
         }
-        byte index = -1;
-        boolean correctIndex = true;
-        do {
-            System.out.print("Выберите номер студента, которого хотите удалить из списка: ");
-            if (in.hasNextByte()) {
-                index = in.nextByte();
-                --index;
-                correctIndex = true;
-            } else {
-                in.next();
-                correctIndex = false;
-            }
-            if (index < 0 || index > data.size() - 1) {
-                System.out.println("Ошибка! Номер студента некорректен. Убедитесь, что он лежит в диапазоне [1; " + data.size() + "].");
-                correctIndex = false;
-            }
-        } while (!correctIndex);
+        byte index = get_index(in, data);
         Student st = data.get(index);
         data.remove(index);
         System.out.println("Студент " + st.getName() + " " + st.getSurname() + " был удален из списка.");
