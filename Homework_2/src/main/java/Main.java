@@ -54,23 +54,18 @@ public class Main {
         ArrayList<String> surnames = new ArrayList<>(Arrays.asList("Иванов", "Дмитриев", "Макаров", "Пономарёв", "Миронов", "Антонов", "Чирков"));
         Random rnd = new Random();
 
-        boolean correctValue = true;
         byte amount = 0;
         do {
             System.out.print("Введите желаемое число студентов: ");
             if (in.hasNextByte()) {
                 amount = in.nextByte();
-                correctValue = true;
             } else {
                 in.next();
             }
             if (amount < 1 || amount > 30) {
-                correctValue = false;
-            }
-            if (!correctValue) {
                 System.out.println("Некорректное число студентов. Убедитесь, что Вы ввели число в диапазоне [1, 30].");
             }
-        } while (!correctValue);
+        } while (amount < 1 || amount > 30);
 
         for (byte i = 0; i < amount; ++i) {
             String name = names.get(rnd.nextInt(names.size()));
